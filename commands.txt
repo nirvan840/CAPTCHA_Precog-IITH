@@ -1,0 +1,42 @@
+## Count images
+
+find task0_dataset/data_hard/A -type f -iname "*.png" | wc -l
+find task0_dataset/data_hard/B -type f -iname "*.png" | wc -l
+find task0_dataset/data_bonus/test -type f -iname "*.png" | wc -l
+
+find task0_dataset/data_med/trainA -type f -iname "*.png" | wc -l
+find task0_dataset/data_med/trainB -type f -iname "*.png" | wc -l
+
+find task0_dataset/data_bonus/test -type f -iname "*.png" | wc -l
+
+find task1_classification/data/train -type f -iname "*.png" | wc -l
+
+find task2_generation/data_chars -type f -iname "*.png" | wc -l
+
+
+-----------------
+
+## Move and Rename for CycleGAN
+
+find task0_dataset/data_med/B/train -type f -exec mv -t task0_dataset/data_med/B/ {} +
+mv task0_dataset/data_med/B task0_dataset/data_med/trainB
+
+-----------------
+
+## Delete empty pngs to prevent errors
+
+preview: find /home/user/ocr/task0_dataset/data_med/trainB/ -type f -empty -name "*.png"
+
+del: find /home/user/ocr/task0_dataset/data_med/trainB/ -type f -empty -name "*.png" -delete
+
+
+-----------------
+
+chmod 600 /home/user/ocr/github_nirvan840
+
+ssh -T git@github.com -i /home/user/ocr/github_nirvan840
+
+git init 
+git branch -m main
+git remote add origin git@github.com:nirvan840/CAPTCHA_Precog-IITH.git
+GIT_SSH_COMMAND='ssh -i /home/user/ocr/github_nirvan840 -o IdentitiesOnly=yes' git pull origin main --allow-unrelated-histories

@@ -1,0 +1,4 @@
+# NOTE bonus_model (256 x 256 input required)
+# NOTE char_model (any input resolution is suitable)
+
+Both models have the same CNN architecture

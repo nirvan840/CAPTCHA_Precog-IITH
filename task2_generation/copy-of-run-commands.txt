@@ -1,0 +1,144 @@
+# Documentation 
+# python train.py \
+#   # General
+#   --dataroot ./task2_classification/data \    # path to images (should have subfolders trainA, trainB, valA, valB, etc)
+#   --name captcha_pix2pix \                    # name of the experiment. It decides where to store samples and models
+#   --gpu_ids 0 \                               # gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU
+#   --model pix2pix \                           # chooses which model to use. [cycle_gan | pix2pix | test | colorization]
+
+#   # Dataset (aligned)
+#   --no_flip \
+#   --dataset_mode aligned \                    # chooses how datasets are loaded. [aligned = pairs]
+#   --direction AtoB \                          # AtoB or BtoA
+#   --num_threads 4 \                           # # threads for loading data
+#   --batch_size 4 \                            # input batch size
+#   --load_size 256 \                           # scale images to this size
+#   --crop_size 256 \                           # then crop to this size
+#   --preprocess none \                         # scaling and cropping of images at load time 
+#   --max_dataset_size 10000 \                  # TODO Maximum number of samples allowed per dataset. 
+
+#   # Visualization & Logging
+#   --display_freq 400 \                        # TODO frequency of showing training results on visdom
+#   --update_html_freq 400 \                    # TODO frequency of saving training results to html 
+#   --display_port 8097 \                       # visdom port of the web display
+#   #--display_id -1 \                          # visdom saving is on by default (display_id=1)
+#   #--no_html \                                # HTML saving is on by default 
+#   --use_wandb \                               # if specified, then init wandb logging
+#   --wandb_project_name captcha_pix2pix \      # specify wandb project name
+
+#   # Training controls
+#   # --continue_train \                        # uncomment to continue training: load the latest model
+#   --phase train \                             # train, val, test
+
+#   # Learning schedule & optimizer
+#   --n_epochs 100 \                            # number of epochs with the initial learning rate
+#   --n_epochs_decay 100 \                      # number of epochs to linearly decay learning rate to zero
+#   --beta1 0.5 \                               # momentum term of adam
+#   --lr 0.0002 \                               # initial learning rate for adam
+#   --gan_mode lsgan \                          # the type of GAN objective. [vanilla| lsgan | wgangp]
+#   --pool_size 50 \                            # the size of image buffer that stores previously generated images
+#   --lr_policy linear \                        # learning rate policy. [linear | step | plateau | cosine]
+#   --lr_decay_iters 50                         # multiply by a gamma every lr_decay_iters iterations
+
+
+# Detailed pix2pix 
+python train.py \
+  --dataroot /home/user/ocr/task0_dataset/data_med/AB \
+  --name captcha_pix2pix2 \
+  --gpu_ids 0 \
+  --model pix2pix \
+  --ngf 64 \
+  --ndf 128 \
+  --netD n_layers \
+  --n_layers_D 6 \
+  --no_flip \
+  --dataset_mode aligned \
+  --direction AtoB \
+  --num_threads 8 \
+  --batch_size 8 \
+  --load_size 256 \
+  --crop_size 256 \
+  --preprocess none \
+  --max_dataset_size 10000 \
+  --phase train \
+  --n_epochs 100 \
+  --n_epochs_decay 100 \
+  --beta1 0.5 \
+  --lr 0.0001 \
+  --gan_mode lsgan  \
+  --pool_size 50 \
+  --lr_policy linear \
+  --lr_decay_iters 50 \
+  --display_freq 1000 \
+  --update_html_freq 1000 \
+  --display_id -1 \
+  --display_port 8097 \
+  --use_wandb \
+  --wandb_project_name Precog-GAN
+
+
+# Detailed Cycle-GAN
+# v1
+python train.py \
+  --dataroot /home/user/ocr/task0_dataset/data_med \
+  --name captcha_cyclegan \
+  --gpu_ids 0 \
+  --model cycle_gan \
+  --no_flip \
+  --direction AtoB \
+  --num_threads 8 \
+  --batch_size 8 \
+  --load_size 256 \
+  --crop_size 256 \
+  --preprocess none \
+  --max_dataset_size 10000 \
+  --phase train \
+  --n_epochs 100 \
+  --n_epochs_decay 100 \
+  --beta1 0.5 \
+  --lr 0.0001 \
+  --gan_mode lsgan  \
+  --pool_size 50 \
+  --lr_policy linear \
+  --lr_decay_iters 50 \
+  --display_freq 1000 \
+  --update_html_freq 1000 \
+  --display_id -1 \
+  --display_port 8097 \
+  --use_wandb \
+  --wandb_project_name Precog-GAN \
+
+# v2 
+python train.py \
+  --dataroot /home/user/ocr/task0_dataset/data_med_new/AB \
+  --name cyclegan \
+  --gpu_ids 0 \
+  --model cycle_gan \
+  --ngf 128 \
+  --ndf 128 \
+  --netD n_layers \
+  --n_layers_D 6 \
+  --no_flip \
+  --dataset_mode aligned \
+  --direction AtoB \
+  --num_threads 8 \
+  --batch_size 4 \
+  --load_size 256 \
+  --crop_size 256 \
+  --preprocess none \
+  --max_dataset_size 10000 \
+  --phase train \
+  --n_epochs 100 \
+  --n_epochs_decay 100 \
+  --beta1 0.5 \
+  --lr 0.0001 \
+  --gan_mode lsgan  \
+  --pool_size 50 \
+  --lr_policy linear \
+  --lr_decay_iters 50 \
+  --display_freq 1000 \
+  --update_html_freq 500 \
+  --display_id -1 \
+  --display_port 8097 \
+  --use_wandb \
+  --wandb_project_name Precog-GAN 

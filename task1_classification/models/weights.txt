@@ -1,0 +1,2 @@
+Weights (.pth) file exceedes GitHub's maximum allowed upload size
+Please do let me know if .pth files are required, I will set up a Google Drive for the same. 

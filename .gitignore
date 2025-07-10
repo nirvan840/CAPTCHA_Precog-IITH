@@ -1,0 +1,40 @@
+# SSH
+github_nirvan840
+
+# Environment
+.env/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Ignore all PyTorch model files
+*.pth
+
+# Ignore Weights & Biases folder
+wandb/
+
+# task0_dataset
+task0_dataset/data_bonus
+task0_dataset/data_hard
+task0_dataset/data_med
+task0_dataset/data_med_new
+
+# task1_classification
+task1_classification/__pycache__/
+task1_classification/data
+
+# task2_generation
+task2_generation/data_chars
+
+# pix2pix
+# task2_generation/pytorch-CycleGAN-and-pix2pix/
